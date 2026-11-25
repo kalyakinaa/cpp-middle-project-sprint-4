@@ -18,6 +18,7 @@
 #include <vector>
 
 namespace analyzer::metric::metric_impl {
+
 std::string NamingStyleMetric::Name() const { return kName; }
 
 MetricResult::ValueType NamingStyleMetric::CalculateImpl(const function::Function &f) const {
@@ -30,9 +31,7 @@ MetricResult::ValueType NamingStyleMetric::CalculateImpl(const function::Functio
         return "Unknown";
     }
 
-    // Проверяем snake_case
     if (hasUnderscore) {
-        // Должны быть только строчные буквы и подчеркивания
         bool allLower = std::all_of(functionName.begin(), functionName.end(),
                                     [](char c) { return islower(c) || c == '_' || isdigit(c); });
         if (allLower) {
@@ -41,19 +40,14 @@ MetricResult::ValueType NamingStyleMetric::CalculateImpl(const function::Functio
         return "Unknown";
     }
 
-    // Проверяем PascalCase/CamelCase
     if (hasUpper) {
-        // Первая буква заглавная - PascalCase
         if (isupper(functionName[0])) {
             return "Pascal Case";
-        }
-        // Первая буква строчная - camelCase
-        else {
+        } else {
             return "Camel Case";
         }
     }
 
-    // Все символы строчные без разделителей
     return "Lower Case";
 }
 
