@@ -23,8 +23,9 @@ void SumAverageAccumulator::Accumulate(const metric::MetricResult &metric_result
     sum += std::get<int>(metric_result.value);
     count++;
 }
+
 void SumAverageAccumulator::Finalize() {
-    average = static_cast<double>(sum) / count;
+    average = (count > 0) ? static_cast<double>(sum) / count : 0.0;
     is_finalized = true;
 }
 

@@ -10,6 +10,7 @@
 #include <fstream>
 #include <functional>
 #include <iostream>
+#include <numeric>
 #include <ranges>
 #include <sstream>
 #include <string>
@@ -26,6 +27,7 @@ struct CyclomaticComplexityMetric : IMetric {
 protected:
     std::string Name() const override;
 
-    MetricResult::ValueType CalculateImpl(const function::Function& f) const override;};
+    MetricResult::ValueType CalculateImpl(const function::Function &f) const override;
+};
 
 }  // namespace analyzer::metric::metric_impl
